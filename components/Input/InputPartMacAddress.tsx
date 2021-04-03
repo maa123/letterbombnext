@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, InputBase, makeStyles, TextField } from '@material-ui/core'
+import { Input, makeStyles } from '@material-ui/core'
 import { CheckPartAddressPos, ConvertStringToAddress } from '../../utils/MacAddress'
 
 type Props = {
