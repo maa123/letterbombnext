@@ -1,12 +1,20 @@
-import { Container, Select, Button, Tooltip } from '@material-ui/core'
+import { Container, Select, Button, Tooltip, makeStyles, Backdrop, CircularProgress, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import InputMacAddress from '../components/Input/InputMacAddress'
 import Layout from '../components/Layout'
 import { MacAddress } from '../interfaces'
+import { BlobDownload } from '../utils/File'
+import LetterBomb from '../utils/LetterBomb'
 
 const templates = ["J", "U", "E", "K"]
-
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  }
+}))
 const IndexPage = () => {
+  const classes = useStyles()
   let macAddress: MacAddress = [-1, -1, -1, -1, -1, -1]
   const [addressValid, updateAddressValid] = useState(false)
   const updateMacAddress = (mac: MacAddress, valid: boolean) => {
@@ -20,12 +28,27 @@ const IndexPage = () => {
   }
   const [buttonTooltip, updateButtonTooltip] = useState('正しいMacアドレスを入力してください')
   const [selectVal, updateSelectVal] = useState(templates[0])
+  const [progressText, updateProgressText] = useState('生成の準備をしています...')
+  const [open, setOpen] = React.useState(false)
+  const [errMessage, updateErrMessage] = React.useState("")
   const handleSelect = (e: React.ChangeEvent<{ value: unknown }>) => {
     e.preventDefault()
     updateSelectVal(`${e.target.value}`)
   }
+  const generateLetter = async () => {
+    const blob = await LetterBomb(macAddress, selectVal, updateProgressText)
+    setOpen(false)
+        if(blob != null){
+          BlobDownload(blob)
+        }else{
+          updateErrMessage("エラーが発生しました")
+        }
+  }
   const handleGenerateButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    setOpen(true)
+    updateErrMessage("")
+    generateLetter()
   }
   return (
   <Layout title="Letterbomb.js | Next.js">
@@ -52,7 +75,14 @@ const IndexPage = () => {
         </span>
       </Tooltip>
     </p>
+    <Typography color="error" variant="h4">
+      { errMessage }
+    </Typography>
     </Container>
+    <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+        <p>{ progressText }</p>
+    </Backdrop>
   </Layout>
 )}
 
