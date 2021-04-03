@@ -5,7 +5,7 @@ import { CheckAddress, ConvertStringToAddress } from '../../utils/MacAddress'
 import InputPartMacAddress from './InputPartMacAddress'
 
 type Props = {
-    enterValidMacAddress?: (macAddress: MacAddress) => void
+    enterMacAddress?: (macAddress: MacAddress, valid: boolean) => void
 }
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const InputMacAddress = ({enterValidMacAddress = () => {}}: Props) => {
+const InputMacAddress = ({enterMacAddress = () => {}}: Props) => {
     const inputMacAddress: MacAddress = [-1, -1, -1, -1, -1, -1]
     const classes = useStyles()
     const [checked, setChecked] = useState(false)
@@ -36,14 +36,17 @@ const InputMacAddress = ({enterValidMacAddress = () => {}}: Props) => {
             inputMacAddress[pos] = ConvertStringToAddress(PartAddress)
             if(CheckAddress(inputMacAddress)){
                 setChecked(true)
-                enterValidMacAddress(inputMacAddress)
+                enterMacAddress(inputMacAddress, true)
             }else{
+                setChecked(false)
+                enterMacAddress(inputMacAddress, false)
                 if(pos < 5){
                     (refs[pos+1].current?.children[0] as HTMLInputElement).focus()
                 }
             }
         }else{
             setChecked(false)
+            enterMacAddress(inputMacAddress, false)
         }
     }
     
