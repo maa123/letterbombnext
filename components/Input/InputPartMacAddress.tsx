@@ -41,7 +41,7 @@ const InputPartMacAddress = React.forwardRef(({onChangeCallback = () => {}, pos 
         
     }
     return (
-        <Input type="tel" value={value} onChange={onchangeinput} inputProps={{className: classes.common}} error={error} ref={ref} />
+        <Input type="tel" placeholder="00" value={value} onChange={onchangeinput} inputProps={{className: classes.common}} error={error} ref={ref} />
     )
 })
 
