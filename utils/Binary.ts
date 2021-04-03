@@ -77,7 +77,7 @@ Array.prototype.toArrayBuffer = function() {
     return ab;
 }
 
-DataView.prototype.writeArrayBuffer = function(ab, s: Number, e?: Number) {
+DataView.prototype.writeArrayBuffer = function(ab: ArrayBuffer, s: Number, e?: Number) {
     const start = s as number
     if(e == null) {
         e = ab.byteLength + start
@@ -88,7 +88,7 @@ DataView.prototype.writeArrayBuffer = function(ab, s: Number, e?: Number) {
         this.setUint8(i, u8[i - start]);
     }
 }
-DataView.prototype.writeArray = function(arr, s, e) {
+DataView.prototype.writeArray = function(arr: Array<any>, s: Number, e?: Number) {
     const start = s as number
     if (e == null) {
         e = arr.length + start;
@@ -98,7 +98,7 @@ DataView.prototype.writeArray = function(arr, s, e) {
         this.setUint8(i, arr[i - start]);
     }
 }
-DataView.prototype.singleFill = function(data, start, end) {
+DataView.prototype.singleFill = function(data: any, start: Number, end: Number) {
     for (let i = start as number; i < end; i++) {
         this.setUint8(i, data);
     }
