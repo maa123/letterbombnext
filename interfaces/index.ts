@@ -8,3 +8,10 @@ export type User = {
   id: number
   name: string
 }
+
+//入力時空の場合-1を利用
+export type MacAddress =  [number, number, number, number, number, number]
+
+export type HalfMacAddress = [number, number, number]
+
+export type MacAddressCheckList = HalfMacAddress[]
