@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
+  },
+  root: {
+    textAlign: "center"
   }
 }))
 const IndexPage = () => {
@@ -53,7 +56,7 @@ const IndexPage = () => {
   return (
   <Layout title="Letterbomb.js | Next.js">
     <Container maxWidth="lg">
-    <Grid container justify="center">
+    <Grid container justify="center" className={classes.root}>
     <Grid item>
     <h1>LetterBomb Offline</h1>
     <p>LetterBombをブラウザ内で生成します</p>
