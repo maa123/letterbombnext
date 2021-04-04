@@ -1,4 +1,4 @@
-import { Container, Select, Button, Tooltip, makeStyles, Backdrop, CircularProgress, Typography, Box } from '@material-ui/core'
+import { Container, Select, Button, Tooltip, makeStyles, Backdrop, CircularProgress, Typography, Box, Grid } from '@material-ui/core'
 import React, { useState } from 'react'
 import InputMacAddress from '../components/Input/InputMacAddress'
 import Layout from '../components/Layout'
@@ -53,6 +53,8 @@ const IndexPage = () => {
   return (
   <Layout title="Letterbomb.js | Next.js">
     <Container maxWidth="lg">
+    <Grid container justify="center">
+    <Grid item>
     <h1>LetterBomb Offline</h1>
     <p>LetterBombをブラウザ内で生成します</p>
     <h4>Mac Address</h4>
@@ -78,6 +80,8 @@ const IndexPage = () => {
     <Typography color="error" variant="h4">
       { errMessage }
     </Typography>
+    </Grid>
+    </Grid>
     </Container>
     <Backdrop className={classes.backdrop} open={open}>
       <Box>
