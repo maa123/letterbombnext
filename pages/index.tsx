@@ -1,4 +1,4 @@
-import { Container, Select, Button, Tooltip, makeStyles, Backdrop, CircularProgress, Typography } from '@material-ui/core'
+import { Container, Select, Button, Tooltip, makeStyles, Backdrop, CircularProgress, Typography, Box } from '@material-ui/core'
 import React, { useState } from 'react'
 import InputMacAddress from '../components/Input/InputMacAddress'
 import Layout from '../components/Layout'
@@ -80,8 +80,14 @@ const IndexPage = () => {
     </Typography>
     </Container>
     <Backdrop className={classes.backdrop} open={open}>
+      <Box>
+        <Box textAlign="center">
         <CircularProgress color="inherit" />
+        </Box>
+        <Box m="auto" ml="1em">
         <p>{ progressText }</p>
+        </Box>
+        </Box>
     </Backdrop>
   </Layout>
 )}
