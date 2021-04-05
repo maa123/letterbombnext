@@ -22,7 +22,7 @@ const InputPartMacAddress = React.forwardRef(({onChangeCallback = () => {}, pos 
     const [error, changeError] = useState(true)
     const onchangeinput = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        if(e.target.value.length > 2) {
+        if(e.target.value.length > 2 || !/^[0-9A-Fa-f]*$/.test(e.target.value)) {
             return
         }
         if(e.target.value.length === 2) {
