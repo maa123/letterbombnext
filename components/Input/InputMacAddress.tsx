@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const InputMacAddress = ({enterMacAddress = () => {}}: Props) => {
-    const inputMacAddress: MacAddress = [-1, -1, -1, -1, -1, -1]
+    const [inputMacAddress, updateInputMacAddress] = useState<MacAddress>([-1, -1, -1, -1, -1, -1])
     const classes = useStyles()
     const [checked, setChecked] = useState(false)
     const refs: React.RefObject<HTMLElement>[] = []
@@ -33,7 +33,9 @@ const InputMacAddress = ({enterMacAddress = () => {}}: Props) => {
     }
     const onChangeInput = (PartAddress: string, pos: number, valid: boolean = false) => {
         if(valid){
-            inputMacAddress[pos] = ConvertStringToAddress(PartAddress)
+            const mac = inputMacAddress;
+            mac[pos] = ConvertStringToAddress(PartAddress)
+            updateInputMacAddress(mac)
             if(CheckAddress(inputMacAddress)){
                 setChecked(true)
                 enterMacAddress(inputMacAddress, true)
